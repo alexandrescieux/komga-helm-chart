@@ -1,10 +1,10 @@
 # Komga Helm Chart
 
-## What the hell is This?
+## What the hell is This ?
 
 This is a Helm Chart for deploying Komga, the self-hosted comics/manga server that you never knew you needed but now can't live without.
 
-## Why Should You Care?
+## Why should I care ?
 
 You tell me, you are the one who got here in the first place.
 
