@@ -1,0 +1,15 @@
+apiVersion: v2
+name: komga
+version: 1.0.0
+description: Deploy a Komga server
+type: application
+keywords:
+  - komga
+  - web
+  - comics
+  - books
+  - manga
+home: https://github.com/gotson/komga
+sources: 
+  - https://github.com/gotson/komga
+appVersion: 1.11.1

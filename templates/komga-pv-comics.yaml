@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-comics
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.volumes.comics.storage }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+     namespace: {{ .Release.Namespace }}
+     name: comics
+  hostPath:
+    path: {{ .Values.volumes.comics.hostpath }}

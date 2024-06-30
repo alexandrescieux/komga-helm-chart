@@ -1,0 +1,58 @@
+namespace: komga
+
+certificate:
+  issuer: letsencrypt-prod
+  commonName: # YOUR HOSTNAME HERE
+
+deployment:
+  image: gotson/komga
+  replicas: 1
+  ports:
+    containerPort: 25600
+  volume:
+    config:
+      name: config
+      volumeMounts: 
+        mountPath: /config
+        readOnly: false
+      persistentVolumeClaim:
+        claimName: config
+    data:
+      name: data
+      volumeMounts: 
+        mountPath: /data
+        readOnly: false
+      persistentVolumeClaim:
+        claimName: data
+    comics:
+      name: comics
+      volumeMounts: 
+        mountPath: /mnt/comics
+        readOnly: false
+      persistentVolumeClaim:
+        claimName: comics
+    manga:
+      name: manga
+      volumeMounts: 
+        mountPath: /mnt/manga
+        readOnly: false
+      persistentVolumeClaim:
+        claimName: manga
+
+service:
+  port: 25600
+  targetPort: 25600
+
+volumes:
+  config:
+    storage: 1Gi
+    hostpath: /mnt/komga/config
+  data:
+    storage: 100Gi
+    hostpath: /mnt/komga/data
+  comics:
+    storage: 100Gi
+    hostpath: /mnt/komga/comics
+  manga:
+    storage: 100Gi
+    hostpath: /mnt/komga/manga

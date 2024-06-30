@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-manga
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.volumes.manga.storage }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+     namespace: {{ .Release.Namespace }}
+     name: manga
+  hostPath:
+    path: {{ .Values.volumes.manga.hostpath }}

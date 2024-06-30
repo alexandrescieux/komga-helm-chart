@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: {{ .Values.deployment.ports.containerPort }}
+              protocol: TCP
+          volumeMounts:
+            - name: {{ .Values.deployment.volume.config.name }}
+              mountPath: {{ .Values.deployment.volume.config.volumeMounts.mountPath }}
+              readOnly: {{ .Values.deployment.volume.config.volumeMounts.readOnly }}
+            - name: {{ .Values.deployment.volume.data.name }}
+              mountPath: {{ .Values.deployment.volume.data.volumeMounts.mountPath }}
+              readOnly: {{ .Values.deployment.volume.data.volumeMounts.readOnly }}
+            - name: {{ .Values.deployment.volume.comics.name }}
+              mountPath: {{ .Values.deployment.volume.comics.volumeMounts.mountPath }}
+              readOnly: {{ .Values.deployment.volume.comics.volumeMounts.readOnly }}
+            - name: {{ .Values.deployment.volume.manga.name }}
+              mountPath: {{ .Values.deployment.volume.manga.volumeMounts.mountPath }}
+              readOnly: {{ .Values.deployment.volume.manga.volumeMounts.readOnly }}
+      volumes:
+        - name: {{ .Values.deployment.volume.config.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.deployment.volume.config.persistentVolumeClaim.claimName }}
+        - name: {{ .Values.deployment.volume.data.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.deployment.volume.data.persistentVolumeClaim.claimName }}
+        - name: {{ .Values.deployment.volume.comics.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.deployment.volume.comics.persistentVolumeClaim.claimName }}
+        - name: {{ .Values.deployment.volume.manga.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.deployment.volume.manga.persistentVolumeClaim.claimName }}
