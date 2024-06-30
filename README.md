@@ -32,7 +32,7 @@ Think you can improve this masterpiece ? Fork it or submit a PR.
 
 ## Acknowledgements
 
-[gotson](https://github.com/gotson), for this fine piece of software that is Komga.
+[gotson](https://github.com/gotson), for Komga, a fine piece of software.
 
 ## License
 
